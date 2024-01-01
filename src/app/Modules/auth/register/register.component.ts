@@ -25,7 +25,7 @@ export class RegisterComponent {
     if (this.myForm.valid) {
       this.userService.register(this.myForm.value).subscribe({
         next: () => {
-          window.location.replace("/auth/login");
+          window.location.replace("/angular-app/#/auth/login");
         },
         error: () => {
           this.share.errorMessageObservable.subscribe(msg => {

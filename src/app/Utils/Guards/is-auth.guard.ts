@@ -13,7 +13,7 @@ export class IsAuthGuard {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (!this.userService.isLoggedIn()) {
-      window.location.replace('/auth/login');
+      window.location.replace('/angular-app/#/auth/login');
       return false;
     }
     return true;

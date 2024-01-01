@@ -14,7 +14,7 @@ export class LoginComponent {
 
   myForm = new FormGroup({
     username: new FormControl('', Validators.required),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)])
+    password: new FormControl('', [Validators.required])
   });
 
   errMessage: string = '';
@@ -24,7 +24,9 @@ export class LoginComponent {
       this.userService.login(this.myForm.value).subscribe({
         next: (res: any) => {
           this.userService.storeToken(res.jwt);
-          window.location.replace("/account/profile")
+          localStorage.setItem("IsLoggedIn","true")
+          //window.location.replace("/angular-app/#/account/profile")
+          window.location.reload()
         },
         error: () => {
           this.share.errorMessageObservable.subscribe(msg => {
@@ -34,11 +36,7 @@ export class LoginComponent {
         }
       });
     } else {
-      if (this.myForm.get('password')?.hasError('minlength')) {
-        this.errMessage = "Password must be at least 8 characters long.";
-      }else{
-        this.errMessage = "Please fill out all fields.";
-      }
+        this.errMessage="All fields are required"
     }
   }
 }

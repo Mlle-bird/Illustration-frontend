@@ -275,7 +275,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
       this.illusService.addIllustration(formData, this.user.id_user).subscribe({
         next: (res: any) => {
           this.showSpinner = false;
-          window.location.replace("/illus/details/" + res.id_illus);
+          window.location.replace("/angular-app/#/illus/details/" + res.id_illus);
         },
         error: (error) => {
           this.showSpinner = false;
@@ -309,7 +309,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
       formData.append("language", this.myForm.value.language!);
       this.illusService.addTranslation(formData, this.user.id_user, this.id_illus).subscribe({
         next: (res: any) => {
-          window.location.replace("/illus/details/" + res.id_illus);
+          window.location.replace("/angular-app/#/illus/details/" + res.id_illus);
         },
         error: () => {
           this.share.errorMessageObservable.subscribe(msg => this.errMessage = msg);

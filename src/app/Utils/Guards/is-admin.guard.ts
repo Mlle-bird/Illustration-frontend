@@ -14,7 +14,7 @@ export class IsAdminGuard {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let role = this.userService.decodeJwtToken().payload.scope;
     if (role != "ROLE_ADMIN") {
-      window.location.replace("/illus/list");
+      window.location.replace("/angular-app/#/illus/list");
       return false;
     }
     return true;

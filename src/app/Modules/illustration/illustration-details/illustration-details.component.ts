@@ -13,6 +13,7 @@ export class IllustrationDetailsComponent implements OnInit {
     this.id_illus = Number(this.route.snapshot.paramMap.get('id'));
     this.findById();
     this.isLoggedIn = this.userService.isLoggedIn();
+    this.role = this.userService.decodeJwtToken().payload.scope;
 
   }
   constructor(private illusService: IllustrationService, private route: ActivatedRoute, private userService: UserService) { }
@@ -21,6 +22,7 @@ export class IllustrationDetailsComponent implements OnInit {
   illus: any;
   category: string = "";
   isLoggedIn: boolean = false;
+  role: string= "";
 
   findById() {
     this.illusService.getById(this.id_illus).subscribe((data: any) => {

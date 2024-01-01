@@ -11,16 +11,17 @@ import { UserService } from 'src/app/Utils/Services/User.service';
 export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
+    this.role = this.userService.decodeJwtToken().payload.scope;
   }
 
   constructor(private userService: UserService, private fb: FormBuilder, private share: SharedService) { }
 
   user: any;
   errMessage: string = "";
+  role: string="";
   myForm = this.fb.group({
     fullName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    birthDate: ['', Validators.required],
     username: ['', Validators.required],
     password: ['', [Validators.required, Validators.minLength(8)]]
   });
@@ -28,6 +29,7 @@ export class ProfileComponent implements OnInit {
   getUser() {
     this.userService.getByUsername(this.userService.extractUsername()).subscribe((data: any) => {
       this.user = data;
+      console.log(this.user)
       this.patchValues();
     });
   }
@@ -35,7 +37,6 @@ export class ProfileComponent implements OnInit {
   patchValues() {
     this.myForm.patchValue({
       fullName: this.user.fullName,
-      birthDate: this.user.birthDate,
       username: this.user.username,
       email: this.user.email,
     });

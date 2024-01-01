@@ -123,7 +123,7 @@ export class ResetPasswordComponent {
               }).subscribe({
                   next: (value) => {
                       console.log(value);
-                      window.location.replace("/auth/login");
+                      window.location.replace("/angular-app/#/auth/login");
                   },
                   error: (err) => {
                       this.share.errorMessageObservable.subscribe(value => {

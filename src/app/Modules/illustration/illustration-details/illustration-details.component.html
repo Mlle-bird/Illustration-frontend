@@ -16,11 +16,6 @@
       </div><!-- / project-info-box -->
 
       <div class="project-info-box mt-0 mb-0" *ngIf="isLoggedIn">
-        <button mat-stroked-button color="warn" [routerLink]="['/canvas' , illus?.id_illus]">
-          <mat-icon>add</mat-icon>Add translation
-        </button>
-        <div style="color: grey;" class="mt-3" *ngIf="illus?.addedIlustrtions.length == 0">No translation available
-        </div>
         <mat-form-field class="example-full-width" *ngIf="illus?.addedIlustrtions.length >0" class="mt-3">
           <mat-label>Select language</mat-label>
           <mat-select (selectionChange)="switchLanguage($event)">
@@ -29,6 +24,13 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <br/>
+        <button mat-stroked-button color="warn" [routerLink]="['/canvas' , illus?.id_illus]" *ngIf="role=='ROLE_USER'">
+          <mat-icon>add</mat-icon>Add translation
+        </button>
+        <div style="color: grey;" class="mt-3" *ngIf="illus?.addedIlustrtions.length == 0">No translation available
+        </div>
+        
       </div><!-- / project-info-box -->
       <div class="project-info-box mt-0 mb-0" *ngIf="!isLoggedIn">
         <mat-form-field class="example-full-width" *ngIf="illus?.addedIlustrtions.length >0" class="mt-3">

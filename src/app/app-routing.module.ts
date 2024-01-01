@@ -4,9 +4,10 @@ import { CanvasComponent } from './canvas/canvas.component';
 import { HomeComponent } from './Templates/home/home.component';
 import { IsAuthGuard } from './Utils/Guards/is-auth.guard';
 import { IsNotAuthGuard } from './Utils/Guards/is-not-auth.guard';
+import { IsUserGuard } from './Utils/Guards/is-user.guard';
 
 const routes: Routes = [
-  { path: 'canvas', component: CanvasComponent , canActivate : [IsAuthGuard] },
+  { path: 'canvas', component: CanvasComponent , canActivate : [IsAuthGuard,IsUserGuard] },
   { path: '', component: HomeComponent },
   { path: 'canvas/:id', component: CanvasComponent },
   { path: 'auth', loadChildren: () => import('./Modules/auth/auth.module').then(m => m.AuthModule) , canActivate:[IsNotAuthGuard] },
@@ -15,7 +16,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
